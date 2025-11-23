@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Website - Amplitude Analytics Demo (Homework)</title>
+  <style>
+    /* === your original styles kept intact === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh; padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,.1); overflow: hidden; }
+    .header { background: linear-gradient(45deg, #4a90e2, #667eea); color: white; padding: 40px; text-align: center; }
+    .header h1 { font-size: 2.5em; margin-bottom: 10px; font-weight: 300; }
+    .header p { font-size: 1.2em; opacity: .9; }
+    .main-content { padding: 40px; }
+    .section { margin-bottom: 40px; padding: 30px; border-radius: 10px; background: #f8f9fa; border-left: 5px solid #4a90e2; }
+    .section h2 { color: #4a90e2; margin-bottom: 20px; font-size: 1.8em; }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .nav-links a { display: inline-block; padding: 12px 24px; background: #4a90e2; color: white; text-decoration: none; border-radius: 25px; transition: all .3s ease; font-weight: 500; }
+    .nav-links a:hover { background: #357abd; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(74,144,226,.4); }
+    .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+    .btn { padding: 15px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all .3s ease; text-transform: uppercase; letter-spacing: .5px; }
+    .btn-primary { background: #4a90e2; color: white; }
+    .btn-success { background: #28a745; color: white; }
+    .btn-warning { background: #ffc107; color: #212529; }
+    .btn-danger { background: #dc3545; color: white; }
+    .btn-info { background: #17a2b8; color: white; }
+    .btn-secondary { background: #6c757d; color: white; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,.2); }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 15px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 16px; transition: border-color .3s ease; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #4a90e2; box-shadow: 0 0 0 3px rgba(74,144,226,.1); }
+    .div-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+    .interactive-div { padding: 30px 20px; border-radius: 12px; text-align: center; color: white; font-weight: 600; cursor: pointer; transition: all .3s ease; position: relative; overflow: hidden; }
+    .interactive-div:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 15px 30px rgba(0,0,0,.2); }
+    .div-1 { background: linear-gradient(45deg, #ff6b6b, #ee5a52); }
+    .div-2 { background: linear-gradient(45deg, #4ecdc4, #44a08d); }
+    .div-3 { background: linear-gradient(45deg, #45b7d1, #96c93d); }
+    .div-4 { background: linear-gradient(45deg, #f093fb, #f5576c); }
+    .div-5 { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+    .div-6 { background: linear-gradient(45deg, #43e97b, #38f9d7); }
+    .status { position: fixed; bottom: 20px; right: 20px; background: #28a745; color: white; padding: 15px 20px; border-radius: 10px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,.2); max-width: 300px; z-index: 1000; }
+    .muted { color:#666 }
+    @media (max-width: 768px) {
+      .nav-links { justify-content: center; }
+      .button-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .div-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚀 Simple Website</h1>
+      <p>Amplitude Browser SDK 2 Analytics Demo — Homework</p>
+      <small class="muted">Use the Examples as reference; implement the Homework buttons yourself.</small>
+    </div>
+
+    <div class="main-content">
+      <!-- Navigation Links -->
+      <div class="section">
+        <h2>🔗 Navigation Links</h2>
+        <div class="nav-links">
+          <a href="#home" id="home-link">Home</a>
+          <a href="#about" id="about-link">About</a>
+          <a href="#services" id="services-link">Services</a>
+          <a href="#products" id="products-link">Products</a>
+          <a href="#contact" id="contact-link">Contact</a>
+          <a href="https://amplitude.com" target="_blank" id="external-link">Amplitude</a>
+        </div>
+        <small class="muted"><strong>Example wired:</strong> clicking these sends <code>Link Clicked</code>.</small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="section">
+        <h2>🔘 Interactive Buttons</h2>
+
+        <!-- Examples (pre-instrumented) -->
+        <h3>Examples</h3>
+        <div class="button-grid">
+          <button class="btn btn-primary"  id="ex-page">EX: Track Page Viewed</button>
+          <button class="btn btn-success"  id="ex-product">EX: Track Product Viewed</button>
+          <button class="btn btn-info"     id="ex-identify">EX: Identify User</button>
+          <button class="btn btn-warning"  id="ex-group">EX: Set Group & Group Identify</button>
+          <button class="btn btn-danger"   id="ex-revenue">EX: Order Completed (Revenue)</button>
+          <button class="btn btn-secondary" id="flush">Flush</button>
+        </div>
+
+        <!-- Homework (students must instrument) -->
+        <h3 style="margin-top: 22px;">Homework</h3>
+        <div class="button-grid">
+          <button class="btn btn-primary"  id="todo-add-to-cart">Add To Cart</button>
+          <button class="btn btn-success"  id="todo-checkout-started">Checkout Started</button>
+          <button class="btn btn-info"     id="todo-identify">Sign In (setUserId + identify)</button>
+          <button class="btn btn-warning"  id="todo-join-org">Join Org (setGroup + groupIdentify)</button>
+          <button class="btn btn-danger"   id="todo-revenue">Order Completed (revenue helper)</button>
+        </div>
+        <details style="margin-top: 10px;">
+          <summary>Hints</summary>
+          <ul>
+            <li><code>amplitude.track('Add To Cart', { product_id, quantity, price })</code></li>
+            <li><code>amplitude.setUserId(email); amplitude.identify(new amplitude.Identify().set('plan','free'))</code></li>
+            <li><code>amplitude.setGroup('orgId', orgId); amplitude.groupIdentify('orgId', orgId, new amplitude.Identify().set('plan_tier','pro'))</code></li>
+            <li>Revenue: <code>const r = new amplitude.Revenue().setProductId(id).setPrice(price).setQuantity(qty); amplitude.revenue(r)</code></li>
+          </ul>
+        </details>
+      </div>
+
+      <!-- Form -->
+      <div class="section">
+        <h2>📝 Form Inputs</h2>
+        <form id="demo-form">
+          <div class="form-grid">
+            <div>
+              <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Enter your full name"></div>
+              <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="your@email.com"></div>
+              <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="(555) 123-4567"></div>
+              <div class="form-group"><label for="age">Age</label><input type="number" id="age" name="age" placeholder="25" min="1" max="120"></div>
+            </div>
+            <div>
+              <div class="form-group"><label for="website">Website URL</label><input type="url" id="website" name="website" placeholder="https://example.com"></div>
+              <div class="form-group"><label for="birthday">Birthday</label><input type="date" id="birthday" name="birthday"></div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                  <option value="">Select your country</option>
+                  <option value="us">United States</option>
+                  <option value="ca">Canada</option>
+                  <option value="uk">United Kingdom</option>
+                  <option value="de">Germany</option>
+                  <option value="fr">France</option>
+                  <option value="jp">Japan</option>
+                  <option value="au">Australia</option>
+                  <option value="br">Brazil</option>
+                </select>
+              </div>
+              <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about yourself..."></textarea></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Interests</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item"><input type="checkbox" id="tech" name="interests" value="technology"><label for="tech">Technology</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="sports" name="interests" value="sports"><label for="sports">Sports</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="music" name="interests" value="music"><label for="music">Music</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="travel" name="interests" value="travel"><label for="travel">Travel</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="food" name="interests" value="food"><label for="food">Food</label></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Experience Level</label>
+            <div class="radio-group">
+              <div class="radio-item"><input type="radio" id="beginner" name="experience" value="beginner"><label for="beginner">Beginner</label></div>
+              <div class="radio-item"><input type="radio" id="intermediate" name="experience" value="intermediate"><label for="intermediate">Intermediate</label></div>
+              <div class="radio-item"><input type="radio" id="advanced" name="experience" value="advanced"><label for="advanced">Advanced</label></div>
+              <div class="radio-item"><input type="radio" id="expert" name="experience" value="expert"><label for="expert">Expert</label></div>
+            </div>
+          </div>
+
+          <div class="button-grid">
+            <button type="submit" class="btn btn-success">Submit Form</button>
+            <button type="reset" class="btn btn-secondary">Reset Form</button>
+          </div>
+        </form>
+        <small class="muted"><strong>Example wired:</strong> submit sends <code>Form Submitted</code>; field changes send <code>Form Field Changed</code>.</small>
+      </div>
+
+      <!-- Interactive Divs -->
+      <div class="section">
+        <h2>📦 Interactive Divs</h2>
+        <div class="div-grid">
+          <div class="interactive-div div-1" id="div-red" data-color="red"><h3>Red Zone</h3><p>Click me!</p></div>
+          <div class="interactive-div div-2" id="div-teal" data-color="teal"><h3>Teal Zone</h3><p>Click me!</p></div>
+          <div class="interactive-div div-3" id="div-blue" data-color="blue"><h3>Blue Zone</h3><p>Click me!</p></div>
+          <div class="interactive-div div-4" id="div-pink" data-color="pink"><h3>Pink Zone</h3><p>Click me!</p></div>
+          <div class="interactive-div div-5" id="div-cyan" data-color="cyan"><h3>Cyan Zone</h3><p>Click me!</p></div>
+          <div class="interactive-div div-6" id="div-green" data-color="green"><h3>Green Zone</h3><p>Click me!</p></div>
+        </div>
+        <small class="muted"><strong>Example wired:</strong> clicking any card sends <code>Div Clicked</code>.</small>
+      </div>
+
+      <!-- Homework Instructions -->
+      <div class="section">
+        <h2>📋 Homework</h2>
+        <ol>
+          <li>Use the **Examples** to understand init & event patterns.</li>
+          <li>Implement all **TODO** buttons using the correct methods and properties.</li>
+          <li>Verify in Amplitude: screenshots of events, user profile, and (if set) group profile.</li>
+          <li>1–2 sentences on your consent approach (optional here since autocapture is on).</li>
+        </ol>
+        <p class="muted"><strong>Acceptance criteria:</strong> correct init; events & props land; identify/group/revenue are implemented properly (use the Revenue helper, not a plain <code>track</code>).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Display -->
+  <div class="status" id="status"><strong>Status:</strong> Amplitude SDK loading… 🔄</div>
+
+  <!-- === Keep your original snippet-style initialization === -->
+  <!-- (This exposes global `amplitude` and uses amplitude.init(...)) -->
+  <script src="https://cdn.amplitude.com/script/3e8cebcf657c6ae69f9fd1d7ecbffcf3.js"></script>
+  <script>
+    // simple UI status helper (replaces earlier amplitude.updateStatus calls)
+    const statusEl = document.getElementById('status');
+    const setStatus = (msg, ok = true) => {
+      statusEl.innerHTML = '<strong>Status:</strong> ' + msg;
+      statusEl.style.background = ok ? '#28a745' : '#dc3545';
+    };
+
+    // guard for SDK presence (ad-blockers/CSP can block the script)
+    window.addEventListener('load', () => {
+      if (typeof window.amplitude === 'undefined') {
+        setStatus('SDK failed to load (CSP or blocker?)', false);
+        console.error('Amplitude snippet not available. Allow cdn.amplitude.com.');
+      } else {
+        setStatus('SDK loaded ✔ — sending Page Loaded…');
+      }
+    });
+
+    // --- keep your initialization shape ---
+    amplitude.init('3e8cebcf657c6ae69f9fd1d7ecbffcf3', null, {
+      autocapture: {
+        attribution: true,
+        pageViews: true,
+        sessions: true,
+        formInteractions: true,
+        fileDownloads: true,
+        elementInteractions: true,
+        pageUrlEnrichment: true,
+        webVitals: true,
+      },
+    });
+
+    // Example: Page Loaded
+    amplitude.track('Page Loaded', {
+      page: 'demo',
+      url: window.location.href,
+      referrer: document.referrer,
+      timestamp: new Date().toISOString()
+    });
+
+    // ===== EXAMPLES (pre-instrumented) =====
+    document.getElementById('ex-page').onclick = () => {
+      amplitude.track('Page Viewed', { page_name: 'Home', path: location.hash || '/' });
+      setStatus('Tracked: Page Viewed');
+    };
+
+    document.getElementById('ex-product').onclick = () => {
+      amplitude.track('Product Viewed', {
+        product_id: 'coffee_espresso',
+        category: 'Coffee',
+        price: 4.5
+      });
+      setStatus('Tracked: Product Viewed');
+    };
+
+    document.getElementById('ex-identify').onclick = () => {
+      amplitude.setUserId('jane@example.com');
+      const identify = new amplitude.Identify().set('plan', 'starter').set('region', 'NA');
+      amplitude.identify(identify);
+      setStatus('Identify sent for jane@example.com');
+    };
+
+    document.getElementById('ex-group').onclick = () => {
+      const orgId = 'acme-inc';
+      amplitude.setGroup('orgId', orgId);
+      const g = new amplitude.Identify().set('plan_tier', 'pro').set('seats', 25);
+      amplitude.groupIdentify('orgId', orgId, g);
+      setStatus('Group set: orgId=acme-inc');
+    };
+
+    document.getElementById('ex-revenue').onclick = () => {
+      const rev = new amplitude.Revenue()
+        .setProductId('coffee_espresso')
+        .setPrice(4.5)
+        .setQuantity(1)
+        .setRevenueType('order');
+      amplitude.revenue(rev);
+      setStatus('Revenue: coffee_espresso x1 @ 4.5');
+    };
+
+    document.getElementById('flush').onclick = () => {
+      if (typeof amplitude.flush === 'function') {
+        amplitude.flush();
+      }
+      setStatus('Flush called 🚚');
+    };
+
+    // ===== EXAMPLE: Navigation link tracking =====
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function () {
+        amplitude.track('Link Clicked', {
+          link_text: this.textContent,
+          link_href: this.href,
+          is_external: this.target === '_blank'
+        });
+        setStatus(`Tracked: Link Clicked (${this.textContent})`);
+      });
+    });
+
+    // ===== EXAMPLE: Form + field changes =====
+    document.getElementById('demo-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const formObject = Object.fromEntries(formData.entries());
+      amplitude.track('Form Submitted', {
+        form_data: formObject,
+        form_fields_count: Object.keys(formObject).length
+      });
+      setStatus('Tracked: Form Submitted');
+    });
+
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('change', function () {
+        amplitude.track('Form Field Changed', {
+          field_name: this.name || this.id,
+          field_type: this.type || this.tagName.toLowerCase(),
+          field_value_length: (this.value || '').length
+        });
+      });
+    });
+
+    // ===== EXAMPLE: Interactive divs =====
+    document.querySelectorAll('.interactive-div').forEach(div => {
+      div.addEventListener('click', function () {
+        amplitude.track('Div Clicked', {
+          div_id: this.id,
+          div_color: this.dataset.color,
+          div_text: this.textContent.trim()
+        });
+        setStatus(`Tracked: Div Clicked (${this.dataset.color})`);
+      });
+    });
+
+    // ===== HOMEWORK: TODOs (students implement) =====
+    document.getElementById('todo-add-to-cart').onclick = () => {
+      // TODO: amplitude.track('Add To Cart', { product_id: 'coffee_espresso', quantity: 1, price: 4.5 });
+      amplitude.track('Add To Cart', { 
+        product_id: 'coffee_espresso', 
+        quantity: 1, 
+        price: 4.5 
+      });
+
+      console.log('[TODO] Add To Cart clicked');
+      setStatus('Tracked: Add To Cart');
+    };
+
+    document.getElementById('todo-checkout-started').onclick = () => {
+      // TODO: amplitude.track('Checkout Started', { cart_value: 4.5, items_count: 1 })
+      amplitude.track('Checkout Started', { 
+        cart_value: 4.5, 
+        items_count: 1 
+      });
+      console.log('[TODO] Checkout Started clicked');
+      setStatus('Tracked: Checkout Started');
+    };
+
+    document.getElementById('todo-identify').onclick = () => {
+      // TODO: const email = document.getElementById('email').value || 'user@example.com';
+      //       amplitude.setUserId(email);
+      //       amplitude.identify(new amplitude.Identify().set('plan','free'));
+      const email = document.getElementById('email').value || 'user@example.com';
+      amplitude.setUserId(email);
+      const identify = new amplitude.Identify()
+        .set('plan', 'free')
+        .set('region', 'NA');
+      amplitude.identify(identify);
+      console.log('[TODO] Identify clicked');
+      setStatus(`Tracked: Identify (${email})`);
+    };
+
+    document.getElementById('todo-join-org').onclick = () => {
+      // TODO: amplitude.setGroup('orgId', 'acme-inc');
+      //       amplitude.groupIdentify('orgId','acme-inc', new amplitude.Identify().set('plan_tier','pro'));
+      const orgId = 'acme-inc';
+      amplitude.setGroup('orgId', orgId);
+      const groupProps = new amplitude.Identify()
+        .set('plan_tier', 'pro')
+        .set('seats', 10);
+      amplitude.groupIdentify('orgId', orgId, groupProps);
+      console.log('[TODO] Join Org clicked');
+      setStatus(`Tracked: Group set (${orgId})`);
+    };
+
+    document.getElementById('todo-revenue').onclick = () => {
+      // TODO: const r = new amplitude.Revenue().setProductId('coffee_espresso').setPrice(4.5).setQuantity(1);
+      //       amplitude.revenue(r);
+      const r = new amplitude.Revenue()
+        .setProductId('coffee_espresso')
+        .setPrice(4.5)
+        .setQuantity(1)
+        .setRevenueType('order');
+      amplitude.revenue(r);
+      console.log('[TODO] Revenue clicked');
+      setStatus('Tracked: Revenue (coffee_espresso x1 @ 4.5)');
+    };
+  </script>
+</body>
+</html>
